@@ -1,0 +1,16 @@
+{
+    "name": "Kamus Toraja",
+    "short_name": "PWA",
+    "description": "Aplikasi Kamus Toraja Berbasis PWA",
+    "icons": [
+        {
+            "src": "../img/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "fullscreen",
+    "theme_color": "#0d0072",
+    "background_color": "#0d0072"
+}
