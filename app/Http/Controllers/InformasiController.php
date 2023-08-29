@@ -37,4 +37,33 @@ class InformasiController extends Controller
         $request->session()->flash('berhasil', 'Data Berhasil diubah! ');
         return redirect('/informasiAdmin');
     }
+
+    public function tambahInformasi(Request $request)
+    {
+
+        $validateData = $request->validate([
+            'audit' => 'required',
+            'nama_prodi' => 'required',
+            'ruang_lingkup' => 'required',
+            'tipe_audit' => 'required',
+            'standar_yg_digunakan' => 'required',
+            'tanggal_audit' => 'required',
+            'auditee' => 'required',
+            'ketua_audit' => 'required'
+        ]);
+
+        Informasi::create($validateData);
+
+        // $guru->save();
+        $request->session()->flash('berhasil', 'Data Berhasil ditambahkan! ');
+        return redirect('/informasiAdmin');
+    }
+
+    public function hapusInformasi(Request $request, $id)
+    {
+        $informasi = Informasi::find($id);
+        $informasi->delete();
+        $request->session()->flash('berhasil', 'Data Berhasil dihapus! ');
+        return redirect('/informasiAdmin');
+    }
 }

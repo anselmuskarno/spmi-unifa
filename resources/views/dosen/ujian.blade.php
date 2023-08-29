@@ -62,7 +62,7 @@
             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
               <span class="user-img"><img class="rounded-circle" src="admin2/assets/img/user-06.jpg" width="30" alt="Admin">
                 <span class="status online"></span></span>
-              <span> {{ session('username') }} - DOSEN</span>
+              <span> {{ session('username') }} - AUDITEE</span>
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/logout" onclick="return confirm('Apakah Anda yakin ingin meninggalkan halaman ini?')">Logout</a>

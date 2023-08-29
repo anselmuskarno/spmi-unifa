@@ -59,7 +59,7 @@
             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
               <span class="user-img"><img class="rounded-circle" src="admin2/assets/img/user-06.jpg" width="30" alt="Admin">
                 <span class="status online"></span></span>
-              <span> {{ session('username') }} - DOSEN</span>
+              <span> {{ session('username') }} - AUDITEE</span>
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/logout" onclick="return confirm('Apakah Anda yakin ingin meninggalkan halaman ini?')">Logout</a>
@@ -115,7 +115,7 @@
             </div>
             <div class="col-md-6">
               <ul class="breadcrumb mb-0 p-0 float-right">
-                <li class="breadcrumb-item"><a href="/dashboardKaprodi"><i class="fas fa-home"></i> Home</a>
+                <li class="breadcrumb-item"><a href="/dashboardDosen"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="breadcrumb-item"><span>Dashboard</span></li>
               </ul>
@@ -133,8 +133,10 @@
               <?php
               if ($totalHasil > 0) { ?>
                 <a href="#!" class="btn btn-danger">Anda telah melakukan Audit</a>
-              <?php } else { ?>
+              <?php } else  if ($totalData > 0) { ?>
                 <a href="ujianDosen" class="btn btn-primary">Mulai Audit</a>
+              <?php } else { ?>
+                <a href="#!" class="btn btn-success">Tidak Ada Data yang Perlu Diaudit</a>
               <?php } ?>
               <span class="float-right"><img src="admin2/assets/img/dash/dash-2.png" width="80" alt=""></span>
             </div>

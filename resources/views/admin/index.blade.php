@@ -114,9 +114,6 @@
       </div>
     </div>
 
-
-
-
     <div class="page-wrapper">
       <div class="content container-fluid">
         @if (session()->has('berhasil'))
@@ -181,7 +178,6 @@
     </div>
 
   </div>
-
 
   <script src="admin2/assets/js/jquery-3.6.0.min.js"></script>
 

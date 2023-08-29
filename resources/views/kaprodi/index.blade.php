@@ -133,8 +133,10 @@
               <?php
               if ($totalHasil > 0) { ?>
                 <a href="#!" class="btn btn-danger">Anda telah melakukan Audit</a>
-              <?php } else { ?>
+              <?php } else  if ($totalData > 0) { ?>
                 <a href="ujianKaprodi" class="btn btn-primary">Mulai Audit</a>
+              <?php } else { ?>
+                <a href="#!" class="btn btn-success">Tidak Ada Data yang Perlu Diaudit</a>
               <?php } ?>
               <span class="float-right"><img src="admin2/assets/img/dash/dash-2.png" width="80" alt=""></span>
             </div>

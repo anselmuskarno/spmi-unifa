@@ -29,6 +29,12 @@ Route::get('/dashboardKaprodi', function () {
     if (session('username') == null) {
         return redirect('/');
     }
+    // $coba = Informasi::All();
+    // echo session('username');
+    // foreach ($coba as $c) {
+    //     echo $c->auditee;
+    // }
+    // return;
     return view('kaprodi/index', [
         'totalUser' => User::count(),
         'user' => User::All(),
@@ -37,6 +43,7 @@ Route::get('/dashboardKaprodi', function () {
         'totalInformasi' => Informasi::count(),
         'informasi' => Informasi::All(),
         'totalHasil' => Hasil::where('pengirim',  session('username'))->count(),
+        'totalData' => Informasi::where('auditee',  session('username'))->count(),
         'hasil' => Hasil::All()
     ]);
 });
@@ -51,8 +58,9 @@ Route::get('/ujianKaprodi', function () {
         'totalPertanyaan' => Pertanyaan::count(),
         'pertanyaan' => Pertanyaan::All(),
         'totalInformasi' => Informasi::count(),
-        'informasi' => Informasi::All(),
+        'informasi' => Informasi::where('auditee',  session('username'))->get(),
         'totalHasil' => Hasil::where('pengirim',  session('username'))->count(),
+        'totalData' => Informasi::where('auditee',  session('username'))->count(),
         'hasil' => Hasil::All()
     ]);
 });
@@ -87,6 +95,7 @@ Route::get('/dashboardDosen', function () {
         'totalInformasi' => Informasi::count(),
         'informasi' => Informasi::All(),
         'totalHasil' => Hasil::where('pengirim',  session('username'))->count(),
+        'totalData' => Informasi::where('auditee',  session('username'))->count(),
         'hasil' => Hasil::All()
     ]);
 });
@@ -101,8 +110,9 @@ Route::get('/ujianDosen', function () {
         'totalPertanyaan' => Pertanyaan::count(),
         'pertanyaan' => Pertanyaan::All(),
         'totalInformasi' => Informasi::count(),
-        'informasi' => Informasi::All(),
+        'informasi' => Informasi::where('auditee',  session('username'))->get(),
         'totalHasil' => Hasil::where('pengirim',  session('username'))->count(),
+        'totalData' => Informasi::where('auditee',  session('username'))->count(),
         'hasil' => Hasil::All()
     ]);
 });
@@ -214,6 +224,7 @@ Route::get('/informasiAdmin', function () {
         'totalInformasi' => Informasi::count(),
         'informasi' => Informasi::All(),
         'totalHasil' => Hasil::count(),
-        'hasil' => Hasil::All()
+        'hasil' => Hasil::All(),
+
     ]);
 });

@@ -140,11 +140,9 @@
                   </div>
                   <div class="col-sm-6 text-sm-right">
                     <div class=" mt-sm-0 mt-2">
-                      @foreach ($informasi as $a)
-                      <a href="#!" class="btn btn-primary btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#editModal{{$a->id}}">
-                        Edit <i class="far fa-edit" data-bs-toggle="tooltip" title="Edit"></i>
+                      <a href="#!" class="btn btn-info btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#tambahModal">
+                        Tambah
                       </a>
-                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -162,127 +160,211 @@
               @endif
 
               <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table custom-table">
-                    <thead class="">
-                      @foreach ($informasi as $a)
-                      <tr>
-                        <th style="width: 300px;">Audit</th>
-                        <th>: {{ $a->audit }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Nama Prodi</th>
-                        <th>: {{ $a->nama_prodi }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Ruang Lingkup</th>
-                        <th>: {{ $a->ruang_lingkup }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Tipe Audit</th>
-                        <th>: {{ $a->tipe_audit }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Standar yang Digunakan</th>
-                        <th>: {{ $a->standar_yg_digunakan }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Tanggal Audit</th>
-                        <th>: {{ $a->tanggal_audit }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Auditee</th>
-                        <th>: {{ $a->auditee }}</th>
-                      </tr>
-                      <tr>
-                        <th style="width: 300px;">Ketua Audit</th>
-                        <th>: {{ $a->ketua_audit }}</th>
-                      </tr>
+                <!-- <div class="table-responsive"> -->
+                <table class="table custom-table" style="display: absolute; width:100%">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>No. </th>
+                      <th>Nama Prodi</th>
+                      <th>Tanggal Audit</th>
+                      <th>Auditee</th>
+                      <th class="text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($informasi as $a)
 
-                      </tr>
-                      @endforeach
-                    </thead>
-                  </table>
+                    <tr>
+                      <td>
+                        <h2> {{ $loop->iteration }} </h2>
+                      </td>
+                      <td> {{ $a->nama_prodi }}</td>
+                      <td> {{ $a->tanggal_audit }}</td>
+                      <td> {{ $a->auditee }}</td>
+                      <td class="text-right d-flex">
+                        <a href="#!" class="btn btn-primary btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#editModal{{$a->id}}">
+                          <i class="far fa-edit" data-bs-toggle="tooltip" title="Edit"></i>
+                        </a>
+                        <a href="/hapusInformasi/{{$a->id}}" onclick="return confirm('Apakah anda yakin data ini akan dihapus?');" type="submit" class="btn btn-danger btn-sm mb-1">
+                          <i class="far fa-trash-alt" data-bs-toggle="tooltip" title="Hapus"></i>
+                        </a>
+                      </td>
+                    </tr>
 
-                  <!-- Modal Edit -->
-                  @foreach ($informasi as $a)
-                  <div class="modal fade" id="editModal{{$a->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit Data Agenda</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form action="/editInformasi/{{$a->id}}" method="post" class="form-horizontal">
-                            @csrf
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Audit</label>
-                                <input class="form-control" type="text" name="audit" value="{{$a->audit}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Nama Program Studi</label>
-                                <input class="form-control" type="text" name="nama_prodi" value="{{$a->nama_prodi}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Ruang Lingkup</label>
-                                <input class="form-control" type="text" name="ruang_lingkup" value="{{$a->ruang_lingkup}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Tipe Audit</label>
-                                <input class="form-control" type="text" name="tipe_audit" value="{{$a->tipe_audit}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Standar yang Digunakan</label>
-                                <input class="form-control" type="text" name="standar_yg_digunakan" value="{{$a->standar_yg_digunakan}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Tanggal Audit</label>
-                                <input class="form-control" type="date" name="tanggal_audit" value="{{$a->tanggal_audit}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Auditee</label>
-                                <input class="form-control" type="text" name="auditee" value="{{$a->auditee}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <label for="">Ketua Audit</label>
-                                <input class="form-control" type="text" name="ketua_audit" value="{{$a->ketua_audit}}">
-                                <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Simpan Data</button>
-                        </div>
-                        </form>
+                    @endforeach
+                  </tbody>
+                </table>
+
+                <!-- Modal Tambah -->
+                <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pertanyaan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
+                      <div class="modal-body">
+                        <form action="/tambahInformasi" method="post" class="form-horizontal">
+                          @csrf
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Audit</label>
+                              <input required class="form-control" type="text" name="audit">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Nama Program Studi</label>
+                              <input required class="form-control" type="text" name="nama_prodi">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Ruang Lingkup</label>
+                              <input required class="form-control" type="text" name="ruang_lingkup">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Tipe Audit</label>
+                              <input required class="form-control" type="text" name="tipe_audit">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Standar yang Digunakan</label>
+                              <input required class="form-control" type="text" name="standar_yg_digunakan">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Tanggal Audit</label>
+                              <input required class="form-control" type="date" name="tanggal_audit">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Auditee</label>
+                              <select class="form-control" name="jabatan" id="jabatan">
+                                @foreach ($user as $u)
+                                <?php if ($u->username == "admin") {
+                                } else { ?>
+                                  <option value="{{ $u->username }}">{{ $u->username }}</option>
+                                <?php } ?>
+                                @endforeach
+                              </select>
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Ketua Audit</label>
+                              <input required class="form-control" type="text" name="ketua_audit">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                      </div>
+                      </form>
                     </div>
                   </div>
-                  @endforeach
                 </div>
+
+                <!-- Modal Edit -->
+                @foreach ($informasi as $a)
+                <div class="modal fade" id="editModal{{$a->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Agenda</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/editInformasi/{{$a->id}}" method="post" class="form-horizontal">
+                          @csrf
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Audit</label>
+                              <input class="form-control" type="text" name="audit" value="{{$a->audit}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Nama Program Studi</label>
+                              <input class="form-control" type="text" name="nama_prodi" value="{{$a->nama_prodi}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Ruang Lingkup</label>
+                              <input class="form-control" type="text" name="ruang_lingkup" value="{{$a->ruang_lingkup}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Tipe Audit</label>
+                              <input class="form-control" type="text" name="tipe_audit" value="{{$a->tipe_audit}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Standar yang Digunakan</label>
+                              <input class="form-control" type="text" name="standar_yg_digunakan" value="{{$a->standar_yg_digunakan}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Tanggal Audit</label>
+                              <input class="form-control" type="date" name="tanggal_audit" value="{{$a->tanggal_audit}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Auditee</label>
+                              <select class="form-control" name="auditee" id="auditee">
+                                <option value="{{$a->auditee}}">{{$a->auditee}}</option>
+                                @foreach ($user as $u)
+                                <?php if ($u->username == "admin") {
+                                } else { ?>
+                                  <option value="{{ $u->username }}">{{ $u->username }}</option>
+                                <?php } ?>
+                                @endforeach
+                              </select>
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-12">
+                              <label for="">Ketua Audit</label>
+                              <input class="form-control" type="text" name="ketua_audit" value="{{$a->ketua_audit}}">
+                              <small class="text-danger"> <i>*Tidak boleh kosong</i> </small>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                @endforeach
               </div>
             </div>
           </div>

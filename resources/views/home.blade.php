@@ -47,7 +47,7 @@
                 <label>Login Sebagai </label>
                 <select class="form-control select" name="jabatan" id="jabatan">
                   <option value="admin">Admin</option>
-                  <option value="dosen">Dosen</option>
+                  <option value="dosen">Auditee</option>
                   <option value="kaprodi">Kaprodi</option>
                 </select>
               </div>

@@ -195,7 +195,13 @@
                           <td>
                             {{ $a->password }}
                           </td>
-                          <td> {{ $a->jabatan }}</td>
+                          <td>
+                            <?php if (($a->jabatan) == "dosen") { ?>
+                              Auditee
+                            <?php } else { ?>
+                              {{ $a->jabatan }}
+                            <?php } ?>
+                          </td>
                           <td class="text-right">
                             <a href="#!" class="btn btn-primary btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#editModal{{$a->id}}">
                               <i class="far fa-edit" data-bs-toggle="tooltip" title="Edit"></i>

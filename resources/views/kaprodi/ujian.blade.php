@@ -120,7 +120,7 @@
                           <th colspan="2">Standar yang Digunakan</th>
                         </tr>
                       </thead>
-                      <form action="/tambahHasil" method="post">
+                      <form action="/tambahHasil" method="post" enctype="multipart/form-data">
                         @csrf
                         @foreach ($informasi as $a)
                         <tbody>
@@ -157,7 +157,7 @@
                           <tr>
                             <td colspan="2">{{ $a->auditee }}</td>
                             <input type="hidden" name="auditee" value="{{ $a->auditee }}">
-                            <td colspan="3">{{ $a->ketua_audit }}</td>
+                            <td colspan="3">Dr. Ir. Muh. Chaerul, S.T., S.KM., M.Sc., IPM</td>
                             <input type="hidden" name="ketua_audit" value="{{ $a->ketua_audit }}">
                           </tr>
                           <tr>
@@ -211,9 +211,17 @@
                           {{ $a->pertanyaan }}
                           <input required type="hidden" name="pertanyaan{{ $loop->iteration }}" value="{{ $a->pertanyaan }}">
                         </td>
-                        <td> <input required type="text" class="form-control" placeholder="" name="bukti{{ $loop->iteration }}"> </td>
+                        <td> <select class="form-control" name="bukti{{ $loop->iteration }}">
+                            <option value="ya">Ya</option>
+                            <option value="tidak">Tidak</option>
+                            <option value="kurang">Kurang</option>
+                          </select> </td>
                         <td>
+                          <span class="badge bg-light">Keterangan</span>
                           <input required type="text" class="form-control" placeholder="" name="keterangan{{ $loop->iteration }}">
+                          <br>
+                          <span class="badge bg-light">Upload bukti pendukung</span>
+                          <input type="file" class="form-control" name="file_bukti{{ $loop->iteration }}">
                         </td>
                         <td>
                           <textarea required name="evaluasi{{ $loop->iteration }}" class="form-control" id="" cols="30" rows="10"></textarea>

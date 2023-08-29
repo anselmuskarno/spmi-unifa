@@ -54,6 +54,7 @@ class HasilController extends Controller
                 'bukti' . $ulang => '',
                 'keterangan' . $ulang => '',
                 'evaluasi' . $ulang => '',
+                'file_bukti' . $ulang => ''
             ]);
 
             $validateData = $request->validate([
@@ -71,14 +72,22 @@ class HasilController extends Controller
                 'audit' => '',
                 'auditee' => '',
                 'evaluasi' => '',
-                'jabatan' => ''
+                'jabatan' => '',
+                'file_bukti' => ''
             ]);
 
+
+            if ($request->hasFile('file_bukti' . $ulang)) {
+                $path = $request->file('file_bukti' . $ulang)->store('upload_file_bukti');
+            } else {
+                $path = 'kosong';
+            }
             $validateData['referensi'] =  $validateData1['referensi' . $ulang];
             $validateData['pertanyaan']  =  $validateData1['pertanyaan' . $ulang];
             $validateData['bukti']  =  $validateData1['bukti' . $ulang];
             $validateData['keterangan']  =  $validateData1['keterangan' . $ulang];
             $validateData['evaluasi']  =  $validateData1['evaluasi' . $ulang];
+            $validateData['file_bukti']  =  $path;
             // return $validateData['referensi'] = "ansel";
             // return 'ok';
             Hasil::create($validateData);
